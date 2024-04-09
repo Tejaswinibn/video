@@ -1,6 +1,8 @@
 package com.example.videostore.model;
 
 import org.springframework.data.annotation.Id;
+
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
@@ -106,6 +108,13 @@ public class Customer {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, password);
+    }
+
+    public boolean isEmpty() {
+        return (firstName == null || firstName.trim().isEmpty()) ||
+                (lastName == null || lastName.trim().isEmpty()) ||
+                (email == null || email.trim().isEmpty()) ||
+                (password == null || password.trim().isEmpty());
     }
 
 }
