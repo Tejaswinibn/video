@@ -23,16 +23,7 @@ public class CustomerController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer, BindingResult result) {
-        if (customer.getEmail() == null || !customer.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            return new ResponseEntity<>("Email is not valid.", HttpStatus.BAD_REQUEST);
-        }
-        if (customer.isEmpty()) { // Implement the isEmpty method in Customer.
-            return new ResponseEntity<>("Customer details are empty", HttpStatus.BAD_REQUEST);
-        }
-        String password = customer.getPassword();
-        if (password == null || password.trim().isEmpty() || password.length() < 6) {
-            return new ResponseEntity<>("Password is not valid. It must be at least 6 characters long.", HttpStatus.BAD_REQUEST);
-        }
+        
         if (result.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
             result.getFieldErrors().forEach(err -> errorMap.put(err.getField(), err.getDefaultMessage()));
